@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: auth-server
+  threads:
+    virtual:
+      enabled: true
+  security:
+    user:
+      name: user
+      password: user
+    oauth2:
+      authorizationserver:
+        client:
+          resource-server:
+            registration:
+              client-id: resource-server
+              client-name: test
+              client-secret: "{noop}123"
+              client-authentication-methods:
+                - client_secret_basic
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              redirect-uris:
+                - http://127.0.0.1:8200/login/oauth2/code/resource-server
+              scopes:
+                - openid
+server:
+  port: 8100
+logging:
+  level:
+    org.springframework.security: debug
